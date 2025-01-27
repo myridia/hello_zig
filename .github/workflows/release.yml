@@ -22,8 +22,8 @@ jobs:
     steps:
       - name: install dependencies
         run: |
-         sudo apt-get snapd
-         sudo snap  install zig --beta --classic 
+         sudo apt-get install snapd
+         sudo snap install zig --beta --classic 
       - name: Checkout repository
         uses: actions/checkout@v4
 
