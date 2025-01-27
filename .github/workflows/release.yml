@@ -27,21 +27,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: list_targets
-        run: |
-          rustup target list
 
-      - name: add_targets
+
+      - name: build-exe
         run: |
           zig build-exe src/main.zig -femit-bin=windows/hello_zig.exe  -target x86_64-windows
           zig build-exe src/main.zig -femit-bin=linux/hello_zig_linux  -target x86_64-linux
           zig build-exe src/main.zig -femit-bin=macos/hello_zig_macos  -target x86_64-macos
           
-      - name: upload binary intel to release
+      - name: upload binary windows to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: 'windows/hello_zig.exe'
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
+
+      - name: upload binary macos to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: 'windows/hello_zig_macos.exe'
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
