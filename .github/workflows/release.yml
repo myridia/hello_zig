@@ -1,0 +1,48 @@
+name: Build MacOs Release
+
+on:
+  push:
+    branches: ["main"]
+    tags:
+      - '*'
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write 
+  issues: read
+  packages: none
+
+jobs:
+  # Single deploy job since we're just deploying
+  build:
+    if: github.repository_owner == 'myridia'
+    runs-on: ubuntu-latest   
+    steps:
+      - name: install dependencies
+        run: |
+         sudo apt-get snapd
+         sudo snap  install zig --beta --classic 
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: list_targets
+        run: |
+          rustup target list
+
+      - name: add_targets
+        run: |
+          zig build-exe src/main.zig -femit-bin=windows/hello_zig.exe  -target x86_64-windows
+          zig build-exe src/main.zig -femit-bin=linux/hello_zig_linux  -target x86_64-linux
+          zig build-exe src/main.zig -femit-bin=macos/hello_zig_macos  -target x86_64-macos
+          
+      - name: upload binary intel to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: 'windows/hello_zig.exe'
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
+

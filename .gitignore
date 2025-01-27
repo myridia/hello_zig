@@ -1,2 +1,12 @@
 .zig-cache/
 zig-out/
+zig
+/windows/*
+!/windows/.hidden
+
+/linux/*
+!/linux/.hidden
+
+/macos/*
+!/macos/.hidden
+
