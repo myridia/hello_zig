@@ -8,6 +8,8 @@ make windows
 make linux
 make macos
 ```
+> [!TIP]
+> See the Make file for the commands
 
 ## Example of installing zig on linux
 ```
