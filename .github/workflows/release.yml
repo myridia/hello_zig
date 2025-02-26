@@ -31,7 +31,7 @@ jobs:
 
       - name: build-exe
         run: |
-          zig build-exe src/main.zig -femit-bin=windows/hello_zig_32.exe  -target i386-windows
+          zig build-exe src/main.zig -femit-bin=windows/hello_zig_32.exe  -target x86-windows-gnu
           zig build-exe src/main.zig -femit-bin=windows/hello_zig.exe  -target x86_64-windows
           zig build-exe src/main.zig -femit-bin=linux/hello_zig_linux  -target x86_64-linux
           zig build-exe src/main.zig -femit-bin=macos/hello_zig_macos  -target x86_64-macos
