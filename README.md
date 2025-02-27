@@ -11,9 +11,11 @@ make macos
 > [!TIP]
 > See the Make file for the commands
 
+
 ## Example of installing zig on linux
+* Find the latest on https://ziglang.org/download/
 ```
-wget -c  https://ziglang.org/builds/zig-linux-x86_64-0.14.0-dev.2851+b074fb7dd.tar.xz
+wget -c  https://ziglang.org/builds/zig-linux-x86_64-0.14.0-dev.3385+055969b10.tar.xz 
 tar -xvf zig*.tar.xz
 rm *.xz
 mv zig-* zig
